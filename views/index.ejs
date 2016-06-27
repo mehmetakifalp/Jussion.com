@@ -1,51 +1,112 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Jussion.com | the new&simple way to learn a language!</title>
+        <meta name="description" content="Langueage exchange platform for language learners. The best way to find exchanger!" />
+        <meta name="keywords" content="Langueage exchange, spanish, english exchange, video chat" />
+        <meta name="author" content="Codrops - thanks coDrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        
+        <link href="components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css" type="text/css">
 
-    <title>Simple Chat</title>
+        <script src="components/jquery/jquery-1.11.3.min.js"></script>
+        <script src="components/bootstrap/js/bootstrap.min.js"></script>
+        <script src="javascripts/auth-helper.js"></script>
+        <script src="javascripts/api.js"></script>
 
-    <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/default.css" />
+        <link rel="stylesheet" type="text/css" href="css/component.css" />
+        <script src="js/modernizr.custom.js"></script>
+        <style>
+        .modal-content{background-color: #445;}
+        .nl-form .nl-submit{margin: 0 30% 0 0;background:#999}
+        .room-panel { margin-top: 0px; }
+        @media (min-width: 1200px) .container { width: inherit; } 
+        @media (min-width: 992px) .container { width: inherit; } 
+        @media (min-width: 768px) .container { width: inherit; } 
 
-    <script src="/components/jquery/jquery-1.11.3.min.js"></script>
-    <script src="/components/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/javascripts/auth-helper.js"></script>
-    <script src="/javascripts/api.js"></script>
-</head>
+        .forAfterLogin{width: 62%; float: left !important;}
+        .container { padding-right: 5px; padding-left: 5px; margin-right: auto; margin-left: auto; z-index: 1; position: relative; }
+.nl-field-toggle, .nl-form input, .nl-form select { line-height: inherit; display: inline-block; color: #ffffff; cursor: pointer; border-bottom: 2px dashed #ccc; }
 
-<body>
-<% include common/header_main.ejs %>
+.container > header h1 { font-size: 2.625em; line-height: 1.3; margin: 0; font-weight: 500; color: #fff; box-shadow: 1px 1px 1px 0px #eee; border-radius: 20px; }
+.container > header span { display: block; font-size: 60%; color: #f1f1f1; padding: 0 0 0.6em 0.1em; font-size: 20px; font-weight: 200; }
+.footerArea { float: left; width: 100%; text-align: center; bottom: 10px; position: relative; left: 0; font-size: 13px; }
+.container > header { text-align: center; background: rgba(0,0,0,0.01); z-index: 20;  }
+body { font-family: 'Lato', Calibri, Arial, sans-serif; color: #ffe8e7;  background: #01bf86;  font-weight: 300; overflow-x: hidden; background-size: cover; }
+        </style>
+    </head>
+
+<body class="nl-blurred">
+
+<div class="container demo-1">
+<!-- <div id="video_pattern" style="position: absolute;top: 0%;width: 100%;height: 100%;overflow: hidden;z-index: 0;background: #000;opaci;opacity: 0.2;border-radius: 50px;margin: 5px 0 0 0;"></div> -->
+
+            <header>
+                <h1>Jussion.com<span>the new&simple way to make language exchange!</span></h1>  
+            </header>
+            <div class="main clearfix">
+      <div class="container demo-1">
+           
+
 <% include common/authentication.ejs %>
 
 <section class="container room-panel">
     <% if (message.length > 0) { %>
     <div class="alert alert-danger align-center"><%=message%></div>
     <% } %>
-    <div class="form-horizontal create-pan-login">
-        <div class="form-group">
-            <label for="select-keyword">Keyword</label>
-            <select class="form-control" id="select-keyword" name="keyword" required>
-                <%for (var i=0; i<keywords.length; i++){%>
-                <option value="<%=keywords[i]%>"><%=keywords[i]%></option>
-                <%}%>
-            </select>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
-                <button class="btn btn-info form-control" onclick="go_match()">Find Match</button>
+<form id="nl-form" class="nl-form">
+<div class="forLanguageLearner">
+                    I know 
+                    <select>
+                        <option value="1" selected>English</option>
+                        <option value="2">French</option>
+                        <option value="3">Spanish</option>
+                        <option value="4">Chinese</option>
+                        <option value="2">Turkish</option>
+                    </select>
+                    <br />
+                    I m learning 
+                    <select class="form-control" id="select-keyword" name="keyword" required>
+                        <%for (var i=0; i<keywords.length; i++){%>
+                         <option value="<%=keywords[i]%>"><%=keywords[i]%></option>
+                      <%}%>
+    
+                    </select>
+                    </div>
+                        <button type="button" class="nl-submit" onclick="go_match()">Start Practice!</button>
+
+                    <div class="nl-overlay"></div>
+                </form>
             </div>
-        </div>
-    </div>
+        
+        </div><!-- /container -->
+
+        <script src="js/nlform.js"></script>
+        <script>
+            var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+        </script>
+
+
 </section>
+        <div class="footerArea">
+                <p>Video chat platform for language learner.</p>
+                <a href="https://jussion.com" title="Language Exchange Platform">Jussion.com | </a>
+               <!-- <a href="https://jussion.com" title="Jussion.com">Blog | </a> -->
+                <a href="mailto:mobilerast@gmail.com?Subject=Jussion.com" target="_top">Contact Us | </a> 
+            </div>
 
 
 
-<script>
+                               <script>
     var email='<%=email%>';
+
     var called_room = '<%=called_room%>';
 
     $('#go-select-room').on('submit', function() {
@@ -57,9 +118,27 @@
     });
 
     $(function(){
-        if (!email)
+        if (!email){
             $('#login_but').hide();
+        }
+
+     if(email.length > 1){
+        // alert(email);
+        go_match();
+        $(".nl-submit").text("CONTINUE!");
+        $(".nl-submit").addClass("forAfterLogin");
+        // $(".forLanguageLearner").css("display","none");
+    }
     });
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61573566-4', 'auto');
+  ga('send', 'pageview');
+
 </script>
 
 <form action="/create-room" method="post" id="go-form" style="display: none"></form>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Simple Chat</title>
+    <title>Jussion.com</title>
 
     <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,14 +20,34 @@
     <script src="/javascripts/chat.js"></script>
     <script src="/javascripts/vchat.js"></script>
     <script src="/javascripts/api.js"></script>
+    <style>
+    .navbar-default { background-color: #445 !important; border-color: #445 !important; }
+    .buttonForSendMsg { float: right; font-size: 14px; width: 50px; height: 39px; background: #eee; position: absolute; right: 0px; margin: -39px 0 0 0; line-height: 43px; text-indent: 6px; }
+    .headerForChat{float:left;width:100%;height:120px;background:#ccc;}
+    </style>
 </head>
 
 <body>
-<% include common/header_main.ejs %>
-<section class="room-panel" style="margin-left: 10px; margin-right: 10px">
+<section class="room-panel" style="margin-left: 10px; margin-right: 10px;margin-top: 0px;">
     <div class="row">
-        <div class="col-md-2">
-            <label>My Video</label>
+  <div class="col-md-1 profileMenu" style="float: left; height: 319px; padding: 0px; margin: 0px;background: #445;">
+    <% include common/header_main.ejs %>
+
+  </div>
+        <div class="col-md-8" style=" margin: 0px; padding: 0px;">
+
+        <div class="col-md-12 " style=" margin: 0px; padding: 0px;">
+          
+            <video id="other-video" class="friendVideo"
+                   autoplay="autoplay"
+                   style="background: black;
+                            width: 100%;"
+                    >
+            </video>
+        </div>
+
+        <div class="col-md-2" style="margin: 0px;padding: 0px;position: absolute;float: right;bottom: 50px;left: 30%; ">
+            
             <video id="self-video"
                    autoplay="autoplay" muted="muted" volume="0"
                    style="background: black;
@@ -36,34 +56,48 @@
                     >
             </video>
         </div>
-        <div class="col-md-7">
-            <label>Partner Video</label>
-            <video id="other-video"
-                   autoplay="autoplay"
-                   style="background: black;
-                            width: 100%;"
-                    >
-            </video>
+     
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin: 0px; padding: 0px;">
+             <div style="">
+                <button style="border-radius: 0px;" class="btn btn-info form-control findNextMatch" onclick="find_match()">Find Next Match</button>
+            </div>
             <div>
-                <label>Messages :</label>
-                <div style="overflow-x: hidden; height: 300px; background: grey;color: white; padding: 5px;"
-                     id="chat-history"></div>
-                <label>Input Message :</label>
-                <input type="text"  class="form-control" id="input-chat">
+                <div class="chatArea" style="overflow-x: hidden; height: 673px; color: #222;background: #f1f1f1;padding:4px;"
+                     id="chat-history">
+                    <!-- <div class="headerForChat"></div> -->
+                </div>
+                <input type="text"  class="form-control" style="display: block; width: 100%; height: 40px; padding: 0px; font-size: 14px; color: #555; background-color: #fff; background-image: none; border: 1px solid #ccc;  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075); box-shadow: inset 0 1px 1px rgba(0,0,0,.075); -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; margin-top: 0px;" id="input-chat">
+                <div class="buttonForSendMsg">Send</div>
             </div>
-            <div style="margin-top: 20px">
-                <button class="btn btn-info form-control" onclick="find_match()">Find Next Match</button>
-            </div>
+        
         </div>
     </div>
 </section>
 
 <script>
+    var windowH = $(window).height();
+    $(".profileMenu").css("height",windowH-10+"px");
+   
+    $(".friendVideo").css("height",windowH-10+"px");
+
+    var nextMatchHeight = $(".findNextMatch").height();
+    var inputChatHeight = $("#input-chat").height();
+
+    var minusTotal = nextMatchHeight +  inputChatHeight;
+     $(".chatArea").css("height",windowH-minusTotal-25+"px");
     var roomName='<%=roomName%>';
     var userName = '<%=username%>';
-    var email = '<%=email%>'
+    var email = '<%=email%>';
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61573566-4', 'auto');
+  ga('send', 'pageview');
+
 </script>
 
 <form action="/create-room" method="post" id="go-form" style="display: none"></form>

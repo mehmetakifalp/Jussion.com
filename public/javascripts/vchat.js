@@ -84,7 +84,7 @@ function init_easyrtc(){
     //disconnect event
     easyrtc.setDisconnectListener(
         function(){
-            alert("Lost Easyrtc connection");
+            alert("Disconnected Easyrtc connection");
         }
     );
 

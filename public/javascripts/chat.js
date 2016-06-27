@@ -6,7 +6,7 @@ var selfVideo,
 $(function() {
     window.onbeforeunload = function () {
         if (roomName) {
-            var msg = 'Are you sure exit ' + roomName + '\'s vBoardroom?';
+            var msg = 'Are you sure exit ' + roomName + '\'s Jussion?';
             return msg;
         }
     };

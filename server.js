@@ -117,8 +117,8 @@ http.createServer(function (req, res) {
 
 //Start Express https server on port 443
 var httpsServer = https.createServer({
-    key:  fs.readFileSync("./keys/arabam1.key"),
-    cert: fs.readFileSync("./keys/arabam1.crt")
+    key:  fs.readFileSync("./keys/jussion.key"),
+    cert: fs.readFileSync("./keys/jussion.crt")
 }, app).listen(443);
 
 // Start Socket.io so it attaches itself to Express server
