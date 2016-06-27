@@ -1,0 +1,106 @@
+<div id="modal-signin" class="modal">
+    <div class="modal-dialog modal-auth">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">LOGIN</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-7">
+                        <label>Login with:</label>
+                        <div>Quickly login with your social network:</div>
+                        <div class="row socials">
+                            <div class="col-xs-4">
+                                <a href="/auth/facebook" class="btn btn-facebook"><span class="fa fa-facebook"></span> Facebook</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-5">
+                        <form action="/login" name="frm-login" id="frm-login" method="post">
+                            <div class="form-group">
+                                <label for="inp-email">Email address</label>
+                                <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inp-password">Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-default">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                Not registered? Click <a href="javascript:on_sign_up()">here</a> to sign up!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-signup" class="modal">
+    <div class="modal-dialog modal-auth">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Register</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-7">
+                        <label>Register with:</label>
+                        <div>Quickly login with your social network:</div>
+                        <div class="row socials">
+                            <div class="col-xs-4">
+                                <a href="/auth/facebook" class="btn btn-facebook"><span class="fa fa-facebook"></span> Facebook</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-5">
+                        <form action="/signup" name="frm-signup" id="frm-signup" method="post">
+                            <div class="form-group">
+                                <label for="inp-email">Email address</label>
+                                <input type="email" class="form-control" name="email" id="inp-email" placeholder="Enter email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inp-password">Password</label>
+                                <input type="password" class="form-control" name="password" id="inp-password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inp-birthyear">Year of Birth</label>
+                                <select name="birthyear" id="inp-birthyear" class="form-control">
+                                <% for (var y = 1930; y <= new Date().getFullYear() - 10; y++) { %>
+                                    <% if (y == 1980) { %>
+                                    <option value="<%=y%>" selected><%=y%></option>
+                                    <% } else { %>
+                                    <option value="<%=y%>"><%=y%></option>
+                                    <% } %>
+                                <% } %>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="radio-inline prev-caption">Gender</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="male" checked> Male
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="female"> Female
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-default">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                Already registered? Login <a href="javascript:on_sign_in()">here</a> !
+            </div>
+        </div>
+    </div>
+</div>

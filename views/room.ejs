@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Simple Chat</title>
+
+    <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+
+    <script src="/components/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Video chat -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/easyrtc/easyrtc.js"></script>
+    <script src="/javascripts/chat.js"></script>
+    <script src="/javascripts/vchat.js"></script>
+    <script src="/javascripts/api.js"></script>
+</head>
+
+<body>
+<% include common/header_main.ejs %>
+<section class="room-panel" style="margin-left: 10px; margin-right: 10px">
+    <div class="row">
+        <div class="col-md-2">
+            <label>My Video</label>
+            <video id="self-video"
+                   autoplay="autoplay" muted="muted" volume="0"
+                   style="background: black;
+                            width: 100%;
+                            "
+                    >
+            </video>
+        </div>
+        <div class="col-md-7">
+            <label>Partner Video</label>
+            <video id="other-video"
+                   autoplay="autoplay"
+                   style="background: black;
+                            width: 100%;"
+                    >
+            </video>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <label>Messages :</label>
+                <div style="overflow-x: hidden; height: 300px; background: grey;color: white; padding: 5px;"
+                     id="chat-history"></div>
+                <label>Input Message :</label>
+                <input type="text"  class="form-control" id="input-chat">
+            </div>
+            <div style="margin-top: 20px">
+                <button class="btn btn-info form-control" onclick="find_match()">Find Next Match</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var roomName='<%=roomName%>';
+    var userName = '<%=username%>';
+    var email = '<%=email%>'
+</script>
+
+<form action="/create-room" method="post" id="go-form" style="display: none"></form>
+</body>
+</html>

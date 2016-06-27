@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Simple Chat</title>
+
+    <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+
+    <script src="/components/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/javascripts/auth-helper.js"></script>
+    <script src="/javascripts/api.js"></script>
+</head>
+
+<body>
+<% include common/header_main.ejs %>
+<% include common/authentication.ejs %>
+
+<section class="container room-panel">
+    <% if (message.length > 0) { %>
+    <div class="alert alert-danger align-center"><%=message%></div>
+    <% } %>
+    <div class="form-horizontal create-pan-login">
+        <div class="form-group">
+            <label for="select-keyword">Keyword</label>
+            <select class="form-control" id="select-keyword" name="keyword" required>
+                <%for (var i=0; i<keywords.length; i++){%>
+                <option value="<%=keywords[i]%>"><%=keywords[i]%></option>
+                <%}%>
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button class="btn btn-info form-control" onclick="go_match()">Find Match</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    var email='<%=email%>';
+    var called_room = '<%=called_room%>';
+
+    $('#go-select-room').on('submit', function() {
+        if (!$('#room_name').val() && !$('#room_list').val()) {
+            alert('Please input or select the room name.');
+            return false;
+        }
+        return true;
+    });
+
+    $(function(){
+        if (!email)
+            $('#login_but').hide();
+    });
+</script>
+
+<form action="/create-room" method="post" id="go-form" style="display: none"></form>
+
+</body>
+</html>
